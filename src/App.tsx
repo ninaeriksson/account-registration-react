@@ -1,9 +1,10 @@
-import './App.css'
+import './css/App.css'
+import AccountRegistrationForm from './components/AccountRegistrationForm'
 
 function App() {
   return (
     <div>
-      <h1>Account Registration</h1>
+      <AccountRegistrationForm />
     </div>
   )
 }
