@@ -9,8 +9,35 @@ export default function AccountRegistrationForm() {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
+  // validering
+  const isPasswordValid = password.length >= 8;
+  const passwordsMatch =
+    confirmPassword.length > 0 && password === confirmPassword;
+
+  const isFormValid =
+    name && username && email && isPasswordValid && passwordsMatch;
+
+  let errorMessage = null;
+
+  if (!isPasswordValid && password.length > 0) {
+    errorMessage = <p>Password must be at least 8 characters</p>;
+  } else if (!passwordsMatch && confirmPassword.length > 0) {
+    errorMessage = <p>Passwords do not match</p>;
+  }
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+
+    // rensa fälten
+    setName("");
+    setUsername("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+  };
+
   return (
-    <form>
+    <form onSubmit={handleSubmit}>
       <h2>Account Registration</h2>
 
       <InputField label="Name" value={name} onChange={setName} />
@@ -34,7 +61,11 @@ export default function AccountRegistrationForm() {
         onChange={setConfirmPassword}
       />
 
-      <button type="submit">Register</button>
+      {errorMessage}
+
+      <button type="submit" disabled={!isFormValid}>
+        Register
+      </button>
     </form>
   );
 }
