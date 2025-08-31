@@ -28,6 +28,15 @@ export default function AccountRegistrationForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
+    const registrationData = {
+      name,
+      username,
+      email,
+      password,
+    };
+
+    console.log(registrationData);
+
     // rensa fälten
     setName("");
     setUsername("");
